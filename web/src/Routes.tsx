@@ -14,6 +14,10 @@ import NavLayout from './layouts/NavLayout/NavLayout'
 const Routes = () => {
   return (
     <Router>
+      <Route path="/login" page={LoginPage} name="login" />
+      <Route path="/signup" page={SignupPage} name="signup" />
+      <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
+      <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
       <Set wrap={NavLayout}>
         <Route path="/" page={HomePage} name="home" />
         <Route path="/profile" page={ProfilePage} name="profile" />
