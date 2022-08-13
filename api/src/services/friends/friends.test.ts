@@ -26,6 +26,24 @@ describe('friends', () => {
     expect(result).toEqual(scenario.friend.one)
   })
 
+  scenario('creates a friend', async () => {
+    const result = await createFriend({
+      input: { profileId: 4913932 },
+    })
+
+    expect(result.profileId).toEqual(4913932)
+  })
+
+  scenario('updates a friend', async (scenario: StandardScenario) => {
+    const original = await friend({ id: scenario.friend.one.id })
+    const result = await updateFriend({
+      id: original.id,
+      input: { profileId: 7398891 },
+    })
+
+    expect(result.profileId).toEqual(7398891)
+  })
+
   scenario('deletes a friend', async (scenario: StandardScenario) => {
     const original = await deleteFriend({ id: scenario.friend.one.id })
     const result = await friend({ id: original.id })

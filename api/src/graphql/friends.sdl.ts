@@ -1,6 +1,7 @@
 export const schema = gql`
   type Friend {
     id: Int!
+    profileId: Int!
     User: User
     userId: Int
   }
@@ -11,10 +12,12 @@ export const schema = gql`
   }
 
   input CreateFriendInput {
+    profileId: Int!
     userId: Int
   }
 
   input UpdateFriendInput {
+    profileId: Int
     userId: Int
   }
 
