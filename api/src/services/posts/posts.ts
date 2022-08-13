@@ -6,8 +6,10 @@ import type {
 
 import { db } from 'src/lib/db'
 
-export const posts: QueryResolvers['posts'] = () => {
-  return db.post.findMany()
+export const posts: QueryResolvers['posts'] = ({ userId }) => {
+  return db.post.findMany({
+    where: { userId: userId },
+  })
 }
 
 export const post: QueryResolvers['post'] = ({ id }) => {

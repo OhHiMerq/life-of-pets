@@ -2,8 +2,8 @@ import type { ArticlesQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
 export const QUERY = gql`
-  query ArticlesQuery {
-    articles: posts {
+  query ArticlesQuery($userId: Int!) {
+    articles: posts(userId: $userId) {
       id
       body
       userId
