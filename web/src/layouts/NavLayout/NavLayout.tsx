@@ -1,23 +1,39 @@
+import { useAuth } from '@redwoodjs/auth'
 import { Link, routes } from '@redwoodjs/router'
 type NavLayoutProps = {
   children?: React.ReactNode
 }
 
 const NavLayout = ({ children }: NavLayoutProps) => {
+  const { isAuthenticated, currentUser, logOut } = useAuth()
   return (
     <>
       <header>
-        <h1>Redwood Blog</h1>
-        <nav>
-          <ul>
-            <li>
-              <Link to={routes.home()}>Home</Link>
-            </li>
-            <li>
-              <Link to={routes.profile()}>Profile</Link>
-            </li>
-          </ul>
-        </nav>
+        <div>
+          <h1>Redwood Blog</h1>
+          {isAuthenticated ? (
+            <div>
+              <span>Logged in as {currentUser.email}</span>{' '}
+              <nav>
+                <ul>
+                  <li>
+                    <Link to={routes.home()}>Home</Link>
+                  </li>
+                  <li>
+                    <Link to={routes.profile()}>Profile</Link>
+                  </li>
+                </ul>
+              </nav>
+              <button type="button" onClick={logOut}>
+                Logout
+              </button>
+            </div>
+          ) : (
+            <div>
+              <Link to={routes.login()}>Login</Link>
+            </div>
+          )}
+        </div>
       </header>
       <main>{children}</main>
     </>
