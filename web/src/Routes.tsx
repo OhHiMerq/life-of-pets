@@ -21,6 +21,7 @@ const Routes = () => {
       <Set wrap={NavLayout}>
         <Private unauthenticated="login">
           <Route path="/" page={HomePage} name="home" />
+          <Route path="/profile/{id:Int}" page={ProfilePage} name="profile" />
           <Route path="/profile" page={ProfilePage} name="profile" />
           <Route path="/follow" page={FollowPage} name="follow" />
         </Private>
