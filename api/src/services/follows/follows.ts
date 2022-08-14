@@ -6,8 +6,12 @@ import type {
 
 import { db } from 'src/lib/db'
 
-export const follows: QueryResolvers['follows'] = () => {
-  return db.follow.findMany()
+export const follows: QueryResolvers['follows'] = ({ id }) => {
+  return db.follow.findMany({
+    where: {
+      followerId: id,
+    },
+  })
 }
 
 export const follow: QueryResolvers['follow'] = ({ id }) => {

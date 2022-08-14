@@ -8,7 +8,7 @@ export const schema = gql`
   }
 
   type Query {
-    follows: [Follow!]! @requireAuth
+    follows(id: Int!): [Follow!]! @requireAuth
     follow(id: Int!): Follow @requireAuth
   }
 

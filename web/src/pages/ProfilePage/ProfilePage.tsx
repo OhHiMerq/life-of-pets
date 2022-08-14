@@ -1,16 +1,16 @@
-import { MetaTags } from '@redwoodjs/web'
+import { MetaTags, useQuery } from '@redwoodjs/web'
 import ArticlesCell from 'src/components/ArticlesCell'
 import { useAuth } from '@redwoodjs/auth'
+import ProfileHeader from 'src/components/ProfileHeader/ProfileHeader'
 
 const ProfilePage = ({ id }) => {
   const { currentUser } = useAuth()
+  const profileId = id ? +id : currentUser.id
   return (
     <>
       <MetaTags title="Profile" description="Profile page" />
-
-      <h1>ProfilePage</h1>
-
-      <ArticlesCell userId={id ? +id : currentUser.id} />
+      <ProfileHeader userId={profileId} />
+      <ArticlesCell userId={profileId} />
     </>
   )
 }
