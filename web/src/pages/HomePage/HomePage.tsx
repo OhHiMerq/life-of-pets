@@ -6,6 +6,7 @@ import FollowedArticlesCell from 'src/components/FollowedArticlesCell'
 
 const HomePage = () => {
   const { currentUser } = useAuth()
+
   return (
     <>
       <MetaTags title="Home" description="Home page" />

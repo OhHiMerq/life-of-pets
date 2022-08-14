@@ -6,6 +6,25 @@ import type {
 
 import { db } from 'src/lib/db'
 
+export const toFollow: QueryResolvers['toFollow'] = async ({ userId }) => {
+  const followed = await db.follow.findMany({
+    where: { followerId: userId },
+  })
+  const followedUserId = [userId]
+  for (var i in followed) {
+    followedUserId.push(followed[i].followsId)
+  }
+
+  return db.user.findMany({
+    where: {
+      NOT: {
+        id: { in: followedUserId },
+      },
+    },
+    include: { follows: true },
+  })
+}
+
 export const users: QueryResolvers['users'] = () => {
   return db.user.findMany()
 }

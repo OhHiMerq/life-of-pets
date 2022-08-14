@@ -8,6 +8,7 @@ generator client {
   binaryTargets = "native"
 }
 
+//follows: list of 
 model User {
   id                  Int       @id @default(autoincrement())
   name                String?
