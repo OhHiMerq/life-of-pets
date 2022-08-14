@@ -25,6 +25,23 @@ export const toFollow: QueryResolvers['toFollow'] = async ({ userId }) => {
   })
 }
 
+export const followed: QueryResolvers['followed'] = async ({ userId }) => {
+  const followed = await db.follow.findMany({
+    where: { followerId: userId },
+  })
+  const followedUserId = []
+  for (var i in followed) {
+    followedUserId.push(followed[i].followsId)
+  }
+
+  return db.user.findMany({
+    where: {
+      id: { in: followedUserId },
+    },
+    include: { follows: true },
+  })
+}
+
 export const users: QueryResolvers['users'] = () => {
   return db.user.findMany()
 }

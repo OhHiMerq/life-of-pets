@@ -1,13 +1,13 @@
 import type {
-  FindToFollowQuery,
-  FindToFollowQueryVariables,
+  FindFollowedQuery,
+  FindFollowedQueryVariables,
 } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import ProfileElement from '../ProfileElement/ProfileElement'
 
 export const QUERY = gql`
-  query FindToFollowQuery($userId: Int!) {
-    toFollow: toFollow(userId: $userId) {
+  query FindFollowedQuery($userId: Int!) {
+    followed: followed(userId: $userId) {
       id
       email
     }
@@ -20,17 +20,17 @@ export const Empty = () => <div>Empty</div>
 
 export const Failure = ({
   error,
-}: CellFailureProps<FindToFollowQueryVariables>) => (
+}: CellFailureProps<FindFollowedQueryVariables>) => (
   <div style={{ color: 'red' }}>Error: {error.message}</div>
 )
 
 export const Success = ({
-  toFollow,
-}: CellSuccessProps<FindToFollowQuery, FindToFollowQueryVariables>) => {
+  followed,
+}: CellSuccessProps<FindFollowedQuery, FindFollowedQueryVariables>) => {
   return (
     <div>
-      <h2>Explore</h2>
-      {toFollow.map((profile) => (
+      <h2>Followed</h2>
+      {followed.map((profile) => (
         <ProfileElement key={profile.id} profile={profile} />
       ))}
     </div>
