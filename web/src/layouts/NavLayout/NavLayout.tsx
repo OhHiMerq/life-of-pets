@@ -20,6 +20,9 @@ const NavLayout = ({ children }: NavLayoutProps) => {
                     <Link to={routes.home()}>Home</Link>
                   </li>
                   <li>
+                    <Link to={routes.follow()}>Follow</Link>
+                  </li>
+                  <li>
                     <Link to={routes.profile()}>Profile</Link>
                   </li>
                 </ul>

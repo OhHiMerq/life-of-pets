@@ -22,6 +22,7 @@ const Routes = () => {
         <Private unauthenticated="login">
           <Route path="/" page={HomePage} name="home" />
           <Route path="/profile" page={ProfilePage} name="profile" />
+          <Route path="/follow" page={FollowPage} name="follow" />
         </Private>
       </Set>{' '}
       <Route notfound page={NotFoundPage} />
