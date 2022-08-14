@@ -3,6 +3,7 @@ import type {
   FindToFollowQueryVariables,
 } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import ToFollowProfile from '../ToFollowProfile/ToFollowProfile'
 
 export const QUERY = gql`
   query FindToFollowQuery($userId: Int!) {
@@ -29,11 +30,7 @@ export const Success = ({
   return (
     <div>
       {toFollow.map((profile) => (
-        <div>
-          <h2>
-            {profile.id} - {profile.email}
-          </h2>
-        </div>
+        <ToFollowProfile key={profile.id} profile={profile} />
       ))}
     </div>
   )
