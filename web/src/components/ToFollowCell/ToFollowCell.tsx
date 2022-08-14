@@ -16,7 +16,7 @@ export const QUERY = gql`
 
 export const Loading = () => <div>Loading...</div>
 
-export const Empty = () => <div>Empty</div>
+export const Empty = () => <div>No Available Profiles</div>
 
 export const Failure = ({
   error,
@@ -29,7 +29,6 @@ export const Success = ({
 }: CellSuccessProps<FindToFollowQuery, FindToFollowQueryVariables>) => {
   return (
     <div>
-      <h2>Explore</h2>
       {toFollow.map((profile) => (
         <ProfileElement key={profile.id} profile={profile} />
       ))}

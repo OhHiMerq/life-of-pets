@@ -9,8 +9,11 @@ const FollowPage = () => {
   return (
     <>
       <MetaTags title="Follow" description="Follow page" />
-      <FollowedCell userId={currentUser.id} />
+      <h2>Explore</h2>
       <ToFollowCell userId={currentUser.id} />
+      <hr />
+      <h2>Followed</h2>
+      <FollowedCell userId={currentUser.id} />
     </>
   )
 }
