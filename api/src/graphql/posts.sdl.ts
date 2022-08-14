@@ -6,8 +6,8 @@ export const schema = gql`
     User: User!
     userId: Int!
   }
-
   type Query {
+    followedPosts(userId: Int!): [Post!]! @skipAuth
     posts(userId: Int!): [Post!]! @requireAuth
     post(id: Int!): Post @requireAuth
   }

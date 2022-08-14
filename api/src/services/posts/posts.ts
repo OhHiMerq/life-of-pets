@@ -6,6 +6,23 @@ import type {
 
 import { db } from 'src/lib/db'
 
+export const followedPosts: QueryResolvers['followedPosts'] = async ({
+  userId,
+}) => {
+  const follows = await db.follow.findMany({
+    where: { followerId: userId },
+  })
+  const result = []
+  for (var i in follows) {
+    result.push(follows[i].followsId)
+  }
+  return db.post.findMany({
+    where: {
+      userId: { in: result },
+    },
+  })
+}
+
 export const posts: QueryResolvers['posts'] = ({ userId }) => {
   return db.post.findMany({
     where: { userId: userId },
