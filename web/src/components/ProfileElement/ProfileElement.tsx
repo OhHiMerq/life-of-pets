@@ -22,8 +22,10 @@ const UNFOLLOW = gql`
 const ProfileElement = ({ profile }) => {
   const { currentUser } = useAuth()
   const [followed, setFollowed] = useState(false)
-  const [createFollow] = useMutation(FOLLOW)
-  const [deleteFollow] = useMutation(UNFOLLOW)
+  const [createFollow, { loading: loadingFollow, error: errorFollow }] =
+    useMutation(FOLLOW)
+  const [deleteFollow, { loading: loadingUnfollow, error: errorUnfollow }] =
+    useMutation(UNFOLLOW)
 
   const onClick = () => {
     if (!followed) {
@@ -48,7 +50,9 @@ const ProfileElement = ({ profile }) => {
       <h2>
         User({profile.id}): {profile.email}
       </h2>
-      <button onClick={onClick}>{followed ? 'Unfollow' : 'Follow'}</button>
+      <button onClick={onClick} disabled={loadingFollow || loadingUnfollow}>
+        {followed ? 'Unfollow' : 'Follow'}
+      </button>
     </div>
   )
 }

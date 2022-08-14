@@ -17,7 +17,7 @@ export const schema = gql`
   }
 
   type Query {
-    toFollow(userId: Int!): [User!]! @skipAuth
+    toFollow(userId: Int!): [User!]! @requireAuth
     users: [User!]! @requireAuth
     user(id: Int!): User @requireAuth
   }

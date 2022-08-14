@@ -28,7 +28,7 @@ export const schema = gql`
   }
 
   type Mutation {
-    createFollow(input: CreateFollowInput!): Follow! @skipAuth
+    createFollow(input: CreateFollowInput!): Follow! @requireAuth
     updateFollow(id: Int!, input: UpdateFollowInput!): Follow! @requireAuth
     deleteFollow(input: DeleteFollowInput!): Follow! @requireAuth
   }
