@@ -147,6 +147,11 @@ const PostDetails = ({ article }) => {
   return (
     <div>
       <button
+        style={
+          userReactData.userReact && userReactData.userReact.value == 1
+            ? { backgroundColor: 'lightblue' }
+            : null
+        }
         onClick={() => {
           executeReact(1)
         }}
@@ -155,6 +160,11 @@ const PostDetails = ({ article }) => {
       </button>
       {likes}|
       <button
+        style={
+          userReactData.userReact && userReactData.userReact.value == 2
+            ? { backgroundColor: 'lightblue' }
+            : null
+        }
         onClick={() => {
           executeReact(2)
         }}
