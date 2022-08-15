@@ -11,6 +11,7 @@ export const QUERY = gql`
       createdAt
       reacts {
         id
+        postId
         userId
         value
       }
