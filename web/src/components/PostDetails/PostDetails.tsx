@@ -109,7 +109,9 @@ const PostDetails = ({ article }) => {
     }
   }
 
-  const onLike = () => {
+  // 1 - like action
+  // 2 - dislike action
+  const executeReact = (reactAction) => {
     const userReactValue = userReactData.userReact
       ? userReactData.userReact.value
       : 0
@@ -117,55 +119,48 @@ const PostDetails = ({ article }) => {
     if (userReactValue == 0) {
       createReact({
         variables: {
-          input: { postId: article.id, userId: currentUser.id, value: 1 },
-        },
-      })
-    } else if (userReactValue == 1) {
-      deleteReact({ variables: { id: userReactData.userReact.id } })
-    } else if (userReactValue == 2) {
-      updateReact({
-        variables: {
-          id: userReactData.userReact.id,
           input: {
             postId: article.id,
             userId: currentUser.id,
-            value: 1,
+            value: reactAction,
           },
         },
       })
-    }
-  }
-
-  const onDislike = () => {
-    const userReactValue = userReactData.userReact
-      ? userReactData.userReact.value
-      : 0
-
-    if (userReactValue == 0) {
-      createReact({
-        variables: {
-          input: { postId: article.id, userId: currentUser.id, value: 2 },
-        },
-      })
-    } else if (userReactValue == 1) {
-      updateReact({
-        variables: {
-          id: userReactData.userReact.id,
-          input: {
-            postId: article.id,
-            userId: currentUser.id,
-            value: 2,
+    } else {
+      if (reactAction == userReactValue) {
+        deleteReact({ variables: { id: userReactData.userReact.id } })
+      } else {
+        updateReact({
+          variables: {
+            id: userReactData.userReact.id,
+            input: {
+              postId: article.id,
+              userId: currentUser.id,
+              value: reactAction,
+            },
           },
-        },
-      })
-    } else if (userReactValue == 2) {
-      deleteReact({ variables: { id: userReactData.userReact.id } })
+        })
+      }
     }
   }
+
   return (
     <div>
-      <button onClick={onLike}>⬆️</button>
-      {likes}|<button onClick={onDislike}>⬇️</button>
+      <button
+        onClick={() => {
+          executeReact(1)
+        }}
+      >
+        ⬆️
+      </button>
+      {likes}|
+      <button
+        onClick={() => {
+          executeReact(2)
+        }}
+      >
+        ⬇️
+      </button>
       {dislikes}
     </div>
   )
