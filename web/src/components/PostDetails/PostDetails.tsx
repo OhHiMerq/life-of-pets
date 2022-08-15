@@ -15,16 +15,16 @@ const CREATE_REACT = gql`
   }
 `
 
-// const UPDATE_REACT = gql`
-//   mutation UpdateReactMutation($id: Int!, $input: UpdateReactInput!) {
-//     updateReact(id: $id, input: $input) {
-//       id
-//       postId
-//       userId
-//       value
-//     }
-//   }
-// `
+const UPDATE_REACT = gql`
+  mutation UpdateReactMutation($id: Int!, $input: UpdateReactInput!) {
+    updateReact(id: $id, input: $input) {
+      id
+      postId
+      userId
+      value
+    }
+  }
+`
 
 const DELETE_REACT = gql`
   mutation DeleteReactMutation($id: Int!) {
@@ -60,27 +60,6 @@ const PostDetails = ({ article }) => {
   var likes = 0
   var dislikes = 0
 
-  // // const [updateReact, { loading: loadingUpdate, error: errorUpdate }] =
-  // //   useMutation(UPDATE_REACT)
-
-  // let userValue = 0
-  // let userReactId = 0
-
-  // let likes = 0
-  // let dislikes = 0
-  // for (var i in article.React) {
-  //   if (article.React[i].value == 1) {
-  //     likes += 1
-  //   } else if (article.React[i].value == 2) {
-  //     dislikes += 1
-  //   }
-
-  //   if (currentUser.id == article.React[i].userId) {
-  //     userValue = article.React[i].value
-  //     userReactId = article.React[i].id
-  //   }
-  // }
-
   const {
     loading: postReactLoading,
     error: postReactError,
@@ -99,21 +78,22 @@ const PostDetails = ({ article }) => {
     variables: { userId: article.userId, postId: article.id },
   })
 
+  const refetchQueries = () => {
+    postReactRefetch({ postId: article.id })
+    userReactRefetch({ userId: article.userId, postId: article.id })
+  }
   const [createReact, { loading: loadingCreate, error: errorCreate }] =
     useMutation(CREATE_REACT, {
-      onCompleted: () => {
-        postReactRefetch({ postId: article.id })
-        userReactRefetch({ userId: article.userId, postId: article.id })
-      },
+      onCompleted: refetchQueries,
     })
 
   const [deleteReact, { loading: loadingDelete, error: errorDelete }] =
     useMutation(DELETE_REACT, {
-      onCompleted: () => {
-        postReactRefetch({ postId: article.id })
-        userReactRefetch({ userId: article.userId, postId: article.id })
-      },
+      onCompleted: refetchQueries,
     })
+
+  const [updateReact, { loading: loadingUpdate, error: errorUpdate }] =
+    useMutation(UPDATE_REACT, { onCompleted: refetchQueries })
 
   if (postReactLoading) return <div>Loading...</div>
   if (postReactError) return <div>Error! ${postReactError.message}</div>
@@ -142,6 +122,17 @@ const PostDetails = ({ article }) => {
       })
     } else if (userReactValue == 1) {
       deleteReact({ variables: { id: userReactData.userReact.id } })
+    } else if (userReactValue == 2) {
+      updateReact({
+        variables: {
+          id: userReactData.userReact.id,
+          input: {
+            postId: article.id,
+            userId: currentUser.id,
+            value: 1,
+          },
+        },
+      })
     }
     // if (userValue == 0) {
     //   createReact({
