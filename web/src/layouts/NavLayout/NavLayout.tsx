@@ -1,5 +1,6 @@
 import { useAuth } from '@redwoodjs/auth'
 import { Link, routes } from '@redwoodjs/router'
+
 type NavLayoutProps = {
   children?: React.ReactNode
 }
