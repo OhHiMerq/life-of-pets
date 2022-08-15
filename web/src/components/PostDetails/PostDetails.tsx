@@ -136,7 +136,32 @@ const PostDetails = ({ article }) => {
     }
   }
 
-  const onDislike = () => {}
+  const onDislike = () => {
+    const userReactValue = userReactData.userReact
+      ? userReactData.userReact.value
+      : 0
+
+    if (userReactValue == 0) {
+      createReact({
+        variables: {
+          input: { postId: article.id, userId: currentUser.id, value: 2 },
+        },
+      })
+    } else if (userReactValue == 1) {
+      updateReact({
+        variables: {
+          id: userReactData.userReact.id,
+          input: {
+            postId: article.id,
+            userId: currentUser.id,
+            value: 2,
+          },
+        },
+      })
+    } else if (userReactValue == 2) {
+      deleteReact({ variables: { id: userReactData.userReact.id } })
+    }
+  }
   return (
     <div>
       <button onClick={onLike}>⬆️</button>
