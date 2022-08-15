@@ -1,7 +1,7 @@
 import { Link, navigate, routes } from '@redwoodjs/router'
 import PostDetails from '../PostDetails/PostDetails'
 
-const Article = ({ article }) => {
+const Article = ({ article, summary = false }) => {
   return (
     <article>
       <header>
@@ -18,6 +18,7 @@ const Article = ({ article }) => {
         {article.body}
       </div>
       <PostDetails article={article} />
+      {summary ? <div>Comment</div> : null}
     </article>
   )
 }
