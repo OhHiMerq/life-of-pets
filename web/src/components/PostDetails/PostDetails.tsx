@@ -75,12 +75,12 @@ const PostDetails = ({ article }) => {
     data: userReactData,
     refetch: userReactRefetch,
   } = useQuery(GET_USER_REACT, {
-    variables: { userId: article.userId, postId: article.id },
+    variables: { userId: currentUser.id, postId: article.id },
   })
 
   const refetchQueries = () => {
     postReactRefetch({ postId: article.id })
-    userReactRefetch({ userId: article.userId, postId: article.id })
+    userReactRefetch({ userId: currentUser.id, postId: article.id })
   }
   const [createReact, { loading: loadingCreate, error: errorCreate }] =
     useMutation(CREATE_REACT, {
@@ -134,26 +134,6 @@ const PostDetails = ({ article }) => {
         },
       })
     }
-    // if (userValue == 0) {
-    //   createReact({
-    //     variables: {
-    //       input: { postId: article.id, userId: currentUser.id, value: 1 },
-    //     },
-    //   })
-    // } else if (userValue == 2) {
-    //   updateReact({
-    //     variables: {
-    //       id: userReactId,
-    //       input: {
-    //         postId: article.id,
-    //         userId: currentUser.id,
-    //         value: 1,
-    //       },
-    //     },
-    //   })
-    // } else if (userValue == 1) {
-    //   deleteReact({ variables: { id: userReactId } })
-    // }
   }
 
   const onDislike = () => {}
