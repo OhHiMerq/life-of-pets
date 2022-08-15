@@ -1,4 +1,5 @@
 import { Link, routes } from '@redwoodjs/router'
+import PostDetails from '../PostDetails/PostDetails'
 
 const Article = ({ article }) => {
   return (
@@ -10,6 +11,7 @@ const Article = ({ article }) => {
         <p>{article.createdAt}</p>
       </header>
       <div>{article.body}</div>
+      <PostDetails article={article} />
     </article>
   )
 }
