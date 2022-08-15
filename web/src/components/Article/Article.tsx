@@ -1,6 +1,6 @@
 import { Link, navigate, routes } from '@redwoodjs/router'
 import PostDetails from '../PostDetails/PostDetails'
-
+import CommentsCell from 'src/components/CommentsCell'
 const Article = ({ article, summary = false }) => {
   return (
     <article>
@@ -18,7 +18,11 @@ const Article = ({ article, summary = false }) => {
         {article.body}
       </div>
       <PostDetails article={article} />
-      {summary ? <div>Comment</div> : null}
+      {summary && (
+        <div>
+          <CommentsCell />
+        </div>
+      )}
     </article>
   )
 }

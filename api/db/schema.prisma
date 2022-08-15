@@ -21,15 +21,17 @@ model User {
   follows             Follow[]  @relation("follower")
   followers           Follow[]  @relation("follows")
   React               React[]
+  comments            Comment[]
 }
 
 model Post {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   body      String
-  createdAt DateTime @default(now())
-  User      User     @relation("posts", fields: [userId], references: [id])
+  createdAt DateTime  @default(now())
+  User      User      @relation("posts", fields: [userId], references: [id])
   userId    Int
   reacts    React[]
+  comments  Comment[]
 }
 
 model React {
@@ -49,4 +51,14 @@ model Follow {
   followsId  Int
   follower   User @relation("follower", fields: [followerId], references: [id])
   follows    User @relation("follows", fields: [followsId], references: [id])
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  body      String
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
 }
