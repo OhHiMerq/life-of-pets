@@ -5,8 +5,7 @@ export const schema = gql`
     createdAt: DateTime!
     User: User!
     userId: Int!
-    likes: Int!
-    dislikes: Int!
+    React: [React]!
   }
   type Query {
     followedPosts(userId: Int!): [Post!]! @requireAuth

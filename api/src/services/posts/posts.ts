@@ -20,12 +20,18 @@ export const followedPosts: QueryResolvers['followedPosts'] = async ({
     where: {
       userId: { in: result },
     },
+    include: {
+      React: true,
+    },
   })
 }
 
 export const posts: QueryResolvers['posts'] = ({ userId }) => {
   return db.post.findMany({
     where: { userId: userId },
+    include: {
+      React: true,
+    },
   })
 }
 
