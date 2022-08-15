@@ -1,4 +1,4 @@
-import { Link, routes } from '@redwoodjs/router'
+import { Link, navigate, routes } from '@redwoodjs/router'
 import PostDetails from '../PostDetails/PostDetails'
 
 const Article = ({ article }) => {
@@ -10,7 +10,13 @@ const Article = ({ article }) => {
         </Link>
         <p>{article.createdAt}</p>
       </header>
-      <div>{article.body}</div>
+      <div
+        onClick={() => {
+          navigate(routes.article({ id: article.id }))
+        }}
+      >
+        {article.body}
+      </div>
       <PostDetails article={article} />
     </article>
   )
