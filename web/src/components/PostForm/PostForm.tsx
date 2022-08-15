@@ -8,6 +8,8 @@ import {
 } from '@redwoodjs/forms'
 import { useMutation } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
+import { QUERY as PostsQuery } from 'src/components/FollowedArticlesCell'
+
 const CREATE = gql`
   mutation CreatePostMutation($input: CreatePostInput!) {
     createPost(input: $input) {
@@ -33,6 +35,7 @@ const PostForm = ({ userId }: Props) => {
       toast.success('Published Successfully!')
       formMethods.reset()
     },
+    refetchQueries: [{ query: PostsQuery, variables: { userId: userId } }],
   })
   const formMethods = useForm()
   const onSubmit: SubmitHandler<FormValues> = (input) => {

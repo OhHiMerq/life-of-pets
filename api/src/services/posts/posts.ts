@@ -12,7 +12,7 @@ export const followedPosts: QueryResolvers['followedPosts'] = async ({
   const follows = await db.follow.findMany({
     where: { followerId: userId },
   })
-  const result = []
+  const result = [userId]
   for (var i in follows) {
     result.push(follows[i].followsId)
   }
