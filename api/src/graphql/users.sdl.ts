@@ -14,7 +14,7 @@ export const schema = gql`
     resetTokenExpiresAt: DateTime
     posts: [Post]!
     follows: [Follow]!
-    React: [React]!
+    reacts: [React]!
   }
 
   type Query {

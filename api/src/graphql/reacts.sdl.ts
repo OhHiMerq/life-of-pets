@@ -9,6 +9,8 @@ export const schema = gql`
   }
 
   type Query {
+    postReacts(postId: Int!): [React]! @requireAuth
+    userReact(userId: Int!, postId: Int!): React @requireAuth
     reacts: [React!]! @requireAuth
     react(id: Int!): React @requireAuth
   }

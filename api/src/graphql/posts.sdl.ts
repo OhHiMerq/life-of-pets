@@ -5,11 +5,11 @@ export const schema = gql`
     createdAt: DateTime!
     User: User!
     userId: Int!
-    React: [React]!
+    reacts: [React]!
   }
   type Query {
     followedPosts(userId: Int!): [Post!]! @requireAuth
-    posts(userId: Int!): [Post!]! @requireAuth
+    posts(userId: Int!): [Post!]! @skipAuth
     post(id: Int!): Post @requireAuth
   }
 

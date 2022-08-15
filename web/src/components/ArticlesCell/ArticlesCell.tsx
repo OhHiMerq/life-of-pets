@@ -9,7 +9,9 @@ export const QUERY = gql`
       body
       userId
       createdAt
-      React {
+      reacts {
+        id
+        userId
         value
       }
     }

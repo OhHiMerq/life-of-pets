@@ -15,6 +15,17 @@ export const react: QueryResolvers['react'] = ({ id }) => {
     where: { id },
   })
 }
+// userReact(userId: Int!): React @requireAuth
+export const userReact: QueryResolvers['userReact'] = ({ userId, postId }) => {
+  return db.react.findFirst({
+    where: { userId: userId, postId: postId },
+  })
+}
+export const postReacts: QueryResolvers['postReacts'] = ({ postId }) => {
+  return db.react.findMany({
+    where: { postId: postId },
+  })
+}
 
 export const createReact: MutationResolvers['createReact'] = ({ input }) => {
   return db.react.create({
