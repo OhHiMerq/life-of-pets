@@ -26,16 +26,16 @@ const CREATE_REACT = gql`
 //   }
 // `
 
-// const DELETE_REACT = gql`
-//   mutation DeleteReactMutation($id: Int!) {
-//     deleteReact(id: $id) {
-//       id
-//       postId
-//       userId
-//       value
-//     }
-//   }
-// `
+const DELETE_REACT = gql`
+  mutation DeleteReactMutation($id: Int!) {
+    deleteReact(id: $id) {
+      id
+      postId
+      userId
+      value
+    }
+  }
+`
 
 const GET_POST_REACTS = gql`
   query GetPostReacts($postId: Int!) {
@@ -48,6 +48,7 @@ const GET_POST_REACTS = gql`
 const GET_USER_REACT = gql`
   query GetUserReact($userId: Int!, $postId: Int!) {
     userReact(userId: $userId, postId: $postId) {
+      id
       value
     }
   }
@@ -61,8 +62,6 @@ const PostDetails = ({ article }) => {
 
   // // const [updateReact, { loading: loadingUpdate, error: errorUpdate }] =
   // //   useMutation(UPDATE_REACT)
-  // // const [deleteReact, { loading: loadingDelete, error: errorDelete }] =
-  // //   useMutation(DELETE_REACT)
 
   // let userValue = 0
   // let userReactId = 0
@@ -95,6 +94,7 @@ const PostDetails = ({ article }) => {
     loading: userReactLoading,
     error: userReactError,
     data: userReactData,
+    refetch: userReactRefetch,
   } = useQuery(GET_USER_REACT, {
     variables: { userId: article.userId, postId: article.id },
   })
@@ -103,6 +103,15 @@ const PostDetails = ({ article }) => {
     useMutation(CREATE_REACT, {
       onCompleted: () => {
         postReactRefetch({ postId: article.id })
+        userReactRefetch({ userId: article.userId, postId: article.id })
+      },
+    })
+
+  const [deleteReact, { loading: loadingDelete, error: errorDelete }] =
+    useMutation(DELETE_REACT, {
+      onCompleted: () => {
+        postReactRefetch({ postId: article.id })
+        userReactRefetch({ userId: article.userId, postId: article.id })
       },
     })
 
@@ -131,6 +140,8 @@ const PostDetails = ({ article }) => {
           input: { postId: article.id, userId: currentUser.id, value: 1 },
         },
       })
+    } else if (userReactValue == 1) {
+      deleteReact({ variables: { id: userReactData.userReact.id } })
     }
     // if (userValue == 0) {
     //   createReact({
