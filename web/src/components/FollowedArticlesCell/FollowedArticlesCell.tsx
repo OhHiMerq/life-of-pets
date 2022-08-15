@@ -24,9 +24,15 @@ export const Failure = ({ error }: CellFailureProps) => (
 export const Success = ({
   followedArticles,
 }: CellSuccessProps<FollowedArticlesQuery>) => {
+  var SortPost = [...followedArticles]
+  SortPost = SortPost.sort(function (a, b) {
+    var dateA = new Date(a.createdAt).getTime()
+    var dateB = new Date(b.createdAt).getTime()
+    return dateA < dateB ? 1 : -1 // ? -1 : 1 for ascending/increasing order
+  })
   return (
     <div>
-      {followedArticles.map((article) => (
+      {SortPost.map((article) => (
         <div>
           <Article key={article.id} article={article} />
         </div>
