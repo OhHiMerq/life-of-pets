@@ -183,9 +183,9 @@ const PostDetails = ({ article }) => {
             executeReact(1)
           }}
         >
-          ⬆️
+          ⬆️ {likes}
         </button>
-        {likes}|
+        &nbsp;|&nbsp;
         <button
           style={
             userReactData.userReact && userReactData.userReact.value == 2
@@ -196,10 +196,10 @@ const PostDetails = ({ article }) => {
             executeReact(2)
           }}
         >
-          ⬇️
+          ⬇️ {dislikes}
         </button>
-        {dislikes}
         <span
+          className="article-details-comment"
           onClick={() => {
             navigate(routes.article({ id: article.id }))
           }}

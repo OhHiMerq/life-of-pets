@@ -15,7 +15,7 @@ const Article = ({ article, summary = false }) => {
     <article className="article">
       <header className="article-header">
         <Link to={routes.profile({ id: article.userId })}>
-          <h3>{article.User.email}</h3>
+          <h3 className="article-email">{article.User.email}</h3>
         </Link>
         <p className="article-date">{formattedDate(article.createdAt)}</p>
       </header>
