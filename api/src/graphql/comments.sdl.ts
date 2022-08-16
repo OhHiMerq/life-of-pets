@@ -11,6 +11,7 @@ export const schema = gql`
 
   type Query {
     comments: [Comment!]! @requireAuth
+    comment(id: Int!): Comment! @requireAuth
   }
 
   input CreateCommentInput {
