@@ -54,6 +54,15 @@ const GET_USER_REACT = gql`
   }
 `
 
+const GET_COMMENTS = gql`
+  query GetComments($postId: Int!) {
+    comments(postId: $postId) {
+      id
+      body
+    }
+  }
+`
+
 const PostDetails = ({ article }) => {
   const { currentUser } = useAuth()
 
@@ -78,6 +87,14 @@ const PostDetails = ({ article }) => {
     variables: { userId: currentUser.id, postId: article.id },
   })
 
+  const {
+    loading: commentsLoading,
+    error: commentsError,
+    data: commentsData,
+  } = useQuery(GET_COMMENTS, {
+    variables: { postId: article.id },
+  })
+
   const refetchQueries = () => {
     postReactRefetch({ postId: article.id })
     userReactRefetch({ userId: currentUser.id, postId: article.id })
@@ -95,10 +112,16 @@ const PostDetails = ({ article }) => {
   const [updateReact, { loading: loadingUpdate, error: errorUpdate }] =
     useMutation(UPDATE_REACT, { onCompleted: refetchQueries })
 
-  if (postReactLoading) return <div>Loading...</div>
-  if (postReactError) return <div>Error! ${postReactError.message}</div>
-  if (userReactLoading) return <div>Loading...</div>
-  if (userReactError) return <div>Error! ${userReactError.message}</div>
+  if (postReactLoading || userReactLoading || commentsLoading)
+    return <div>Loading...</div>
+  if (postReactError || userReactError)
+    return (
+      <div>
+        Error! ${postReactError.message}
+        Error! ${userReactError.message}
+        Error! ${commentsError.message}
+      </div>
+    )
 
   for (var i in postReactData.postReacts) {
     const value = postReactData.postReacts[i].value
@@ -108,7 +131,7 @@ const PostDetails = ({ article }) => {
       dislikes += 1
     }
   }
-
+  console.log(commentsData.comments)
   // 1 - like action
   // 2 - dislike action
   const executeReact = (reactAction) => {
@@ -146,32 +169,35 @@ const PostDetails = ({ article }) => {
 
   return (
     <div>
-      <button
-        style={
-          userReactData.userReact && userReactData.userReact.value == 1
-            ? { backgroundColor: 'lightblue' }
-            : null
-        }
-        onClick={() => {
-          executeReact(1)
-        }}
-      >
-        ⬆️
-      </button>
-      {likes}|
-      <button
-        style={
-          userReactData.userReact && userReactData.userReact.value == 2
-            ? { backgroundColor: 'lightblue' }
-            : null
-        }
-        onClick={() => {
-          executeReact(2)
-        }}
-      >
-        ⬇️
-      </button>
-      {dislikes}
+      <div>
+        <button
+          style={
+            userReactData.userReact && userReactData.userReact.value == 1
+              ? { backgroundColor: 'lightblue' }
+              : null
+          }
+          onClick={() => {
+            executeReact(1)
+          }}
+        >
+          ⬆️
+        </button>
+        {likes}|
+        <button
+          style={
+            userReactData.userReact && userReactData.userReact.value == 2
+              ? { backgroundColor: 'lightblue' }
+              : null
+          }
+          onClick={() => {
+            executeReact(2)
+          }}
+        >
+          ⬇️
+        </button>
+        {dislikes}
+        <span>Comments [{commentsData.comments.length}]</span>
+      </div>
     </div>
   )
 }
