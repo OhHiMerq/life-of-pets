@@ -3,7 +3,7 @@ import { Link, routes } from '@redwoodjs/router'
 const formattedDate = (datetime: ConstructorParameters<typeof Date>[0]) => {
   const parsedDate = new Date(datetime)
   const month = parsedDate.toLocaleString('default', { month: 'long' })
-  return `${parsedDate.getDate()} ${month} ${parsedDate.getFullYear()}`
+  return `${parsedDate.toLocaleTimeString()} | ${parsedDate.getDate()} ${month} ${parsedDate.getFullYear()}`
 }
 
 const Comment = ({ comment }) => {

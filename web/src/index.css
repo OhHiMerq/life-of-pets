@@ -48,7 +48,9 @@
 .article-body {
   padding: 1em;
 }
-
+.article-date {
+  font-size: 0.75em;
+}
 .post-details {
   background-color: #eff6ff;
   margin-top: 0.5em;
