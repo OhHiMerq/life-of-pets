@@ -21,7 +21,11 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ comments }: CellSuccessProps<CommentsQuery>) => {
-  return comments.map((comment) => (
-    <Comment key={comment.id} comment={comment} />
-  ))
+  return (
+    <div>
+      {comments.map((comment) => (
+        <Comment key={comment.id} comment={comment} />
+      ))}
+    </div>
+  )
 }

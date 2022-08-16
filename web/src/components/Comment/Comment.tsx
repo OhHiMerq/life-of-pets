@@ -6,7 +6,8 @@ const formattedDate = (datetime: ConstructorParameters<typeof Date>[0]) => {
 
 interface Props {
   comment: {
-    name: string
+    __typename?: 'Comment'
+    id: number
     createdAt: string
     body: string
   }
@@ -16,7 +17,7 @@ const Comment = ({ comment }: Props) => {
   return (
     <div>
       <header>
-        <h2>{comment.name}</h2>
+        <h2>User</h2>
         <time dateTime={comment.createdAt}>
           {formattedDate(comment.createdAt)}
         </time>
