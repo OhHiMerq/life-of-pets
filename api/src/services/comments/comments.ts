@@ -11,6 +11,14 @@ export const comments: QueryResolvers['comments'] = ({ postId }) => {
     where: {
       postId: postId,
     },
+    include: {
+      user: {
+        select: {
+          id: true,
+          email: true,
+        },
+      },
+    },
   })
 }
 

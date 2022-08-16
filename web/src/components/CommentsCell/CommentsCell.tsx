@@ -8,6 +8,10 @@ export const QUERY = gql`
       id
       body
       createdAt
+      user {
+        id
+        email
+      }
     }
   }
 `
