@@ -17,7 +17,7 @@ const ProfileHeader = ({ userId, currentUserId }) => {
   if (loading) return <div>Loading...</div>
   if (error) return <div>Error! ${error.message}</div>
   return (
-    <header>
+    <header className="card">
       <h2>Profile: {data.user.email}</h2>
 
       {currentUserId == userId ? null : <FollowAction profileId={userId} />}
