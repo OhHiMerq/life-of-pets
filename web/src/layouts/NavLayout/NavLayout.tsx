@@ -11,7 +11,7 @@ const NavLayout = ({ children }: NavLayoutProps) => {
     <>
       <header>
         <div>
-          <h1>Redwood Blog</h1>
+          <h1>MICROBLOG</h1>
           {isAuthenticated ? (
             <div>
               <span>Logged in as {currentUser.email}</span>{' '}

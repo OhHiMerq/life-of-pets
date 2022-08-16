@@ -1,3 +1,4 @@
+import { useAuth } from '@redwoodjs/auth'
 import {
   Form,
   FormError,
@@ -20,6 +21,7 @@ const CREATE = gql`
   }
 `
 const CommentForm = ({ userId, postId }) => {
+  const { currentUser } = useAuth()
   const formMethods = useForm()
   const [createComment, { loading, error }] = useMutation(CREATE, {
     onCompleted: () => {
@@ -31,7 +33,7 @@ const CommentForm = ({ userId, postId }) => {
   const onSubmit = (input) => {
     createComment({
       variables: {
-        input: { body: input.body, postId: postId, userId: userId },
+        input: { body: input.body, postId: postId, userId: currentUser.id },
       },
     })
   }
