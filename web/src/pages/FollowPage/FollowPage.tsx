@@ -9,6 +9,23 @@ const FollowPage = () => {
   return (
     <>
       <MetaTags title="Follow" description="Follow page" />
+      <div style={{ textAlign: 'center' }}>
+        <img
+          style={{ margin: '1em auto' }}
+          src="https://cdn3.emoji.gg/emojis/9072_partycageparrot.gif"
+          alt="partycage"
+        />
+        <img
+          style={{ margin: '1em' }}
+          src="https://cdn3.emoji.gg/emojis/9072_partycageparrot.gif"
+          alt="partycage"
+        />
+        <img
+          style={{ margin: '1em' }}
+          src="https://cdn3.emoji.gg/emojis/9072_partycageparrot.gif"
+          alt="partycage"
+        />
+      </div>
       <h2>Explore</h2>
       <ToFollowCell userId={currentUser.id} />
       <hr />
