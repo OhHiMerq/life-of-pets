@@ -7,7 +7,7 @@ const Article = ({ article, summary = false }) => {
     <article>
       <header>
         <Link to={routes.profile({ id: article.userId })}>
-          <h2>User {article.userId}</h2>
+          <h2>{article.User.email}</h2>
         </Link>
         <p>{article.createdAt}</p>
       </header>

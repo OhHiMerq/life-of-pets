@@ -131,7 +131,7 @@ const PostDetails = ({ article }) => {
       dislikes += 1
     }
   }
-  console.log(commentsData.comments)
+
   // 1 - like action
   // 2 - dislike action
   const executeReact = (reactAction) => {

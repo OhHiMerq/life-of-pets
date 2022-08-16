@@ -15,6 +15,10 @@ export const QUERY = gql`
         userId
         value
       }
+      User {
+        id
+        email
+      }
     }
   }
 `

@@ -22,6 +22,11 @@ export const followedPosts: QueryResolvers['followedPosts'] = async ({
     },
     include: {
       reacts: true,
+      User: {
+        select: {
+          email: true,
+        },
+      },
     },
   })
 }
@@ -31,6 +36,11 @@ export const posts: QueryResolvers['posts'] = ({ userId }) => {
     where: { userId: userId },
     include: {
       reacts: true,
+      User: {
+        select: {
+          email: true,
+        },
+      },
     },
   })
 }
