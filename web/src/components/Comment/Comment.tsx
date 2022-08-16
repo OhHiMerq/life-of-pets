@@ -7,7 +7,6 @@ const formattedDate = (datetime: ConstructorParameters<typeof Date>[0]) => {
 }
 
 const Comment = ({ comment }) => {
-  console.log(comment)
   return (
     <div>
       <header>
