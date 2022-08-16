@@ -14,9 +14,13 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => (
+  <div style={{ textAlign: 'center' }}>Loading...</div>
+)
 
-export const Empty = () => <div>No Available Profiles</div>
+export const Empty = () => (
+  <div style={{ textAlign: 'center' }}>No Available Profiles</div>
+)
 
 export const Failure = ({
   error,
