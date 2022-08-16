@@ -1,0 +1,56 @@
+.btn {
+  display: inline-block;
+  outline: none;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  padding: 2px 16px;
+  height: 32px;
+  min-width: 60px;
+  min-height: 32px;
+  border: none;
+  color: #fff;
+  background-color: rgb(88, 101, 242);
+  transition: background-color 0.17s ease, color 0.17s ease;
+  :hover {
+    background-color: rgb(71, 82, 196);
+  }
+}
+
+.flex-end {
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+}
+
+.card {
+  position: relative;
+  background-color: #eff6ff;
+  box-shadow: 0px 1px 0px 0px rgba(9, 30, 66, 0.25);
+  padding: 16px 16px 40px;
+  width: 25em;
+  margin: 0.5em;
+}
+
+.article {
+  box-shadow: 0 3.2px 7.2px 0 rgb(0 0 0 / 13%), 0 0.6px 1.8px 0 rgb(0 0 0 / 11%);
+  width: 25em;
+  margin: 1em;
+}
+
+.article-header {
+  background-color: #eff6ff;
+  padding: 1em;
+}
+
+.article-body {
+  padding: 1em;
+}
+
+.post-details {
+  background-color: #eff6ff;
+  margin-top: 0.5em;
+  padding: 0.5em;
+}

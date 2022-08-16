@@ -1,6 +1,7 @@
 import { useAuth } from '@redwoodjs/auth'
 import { useMutation, useQuery } from '@redwoodjs/web'
 import { useState } from 'react'
+import 'src/index.css'
 const FOLLOW = gql`
   mutation CreateFollowMutation($input: CreateFollowInput!) {
     createFollow(input: $input) {
@@ -69,7 +70,11 @@ const FollowAction = ({ profileId }) => {
     setFollowed(!followed)
   }
   return (
-    <button onClick={onClick} disabled={loadingFollow || loadingUnfollow}>
+    <button
+      className="btn flex-end"
+      onClick={onClick}
+      disabled={loadingFollow || loadingUnfollow}
+    >
       {followed ? 'Unfollow' : 'Follow'}
     </button>
   )

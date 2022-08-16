@@ -2,12 +2,13 @@ import { Link, navigate, routes } from '@redwoodjs/router'
 import PostDetails from '../PostDetails/PostDetails'
 import CommentsCell from 'src/components/CommentsCell'
 import CommentForm from '../CommentForm/CommentForm'
+import 'src/index.css'
 const Article = ({ article, summary = false }) => {
   return (
-    <article>
-      <header>
+    <article className="article">
+      <header className="article-header">
         <Link to={routes.profile({ id: article.userId })}>
-          <h2>{article.User.email}</h2>
+          <h3>{article.User.email}</h3>
         </Link>
         <p>{article.createdAt}</p>
       </header>
@@ -15,6 +16,7 @@ const Article = ({ article, summary = false }) => {
         onClick={() => {
           navigate(routes.article({ id: article.id }))
         }}
+        className="article-body"
       >
         {article.body}
       </div>

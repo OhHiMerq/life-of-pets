@@ -5,6 +5,8 @@ import { useMutation, useQuery } from '@redwoodjs/web'
 
 // import { QUERY as FeedQuery } from 'src/components/FollowedArticlesCell'
 // import { QUERY as ArticleQuery } from 'src/components/ArticlesCell'
+import 'src/index.css'
+
 const CREATE_REACT = gql`
   mutation CreateReactMutation($input: CreateReactInput!) {
     createReact(input: $input) {
@@ -169,7 +171,7 @@ const PostDetails = ({ article }) => {
   }
 
   return (
-    <div>
+    <div className="post-details">
       <div>
         <button
           style={
