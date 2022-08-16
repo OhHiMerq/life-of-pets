@@ -1,4 +1,5 @@
 import { useAuth } from '@redwoodjs/auth'
+import { navigate, routes } from '@redwoodjs/router'
 import { useMutation, useQuery } from '@redwoodjs/web'
 // import { useMutation } from '@redwoodjs/web'
 
@@ -196,7 +197,13 @@ const PostDetails = ({ article }) => {
           ⬇️
         </button>
         {dislikes}
-        <span>Comments [{commentsData.comments.length}]</span>
+        <span
+          onClick={() => {
+            navigate(routes.article({ id: article.id }))
+          }}
+        >
+          Comments [{commentsData.comments.length}]
+        </span>
       </div>
     </div>
   )
