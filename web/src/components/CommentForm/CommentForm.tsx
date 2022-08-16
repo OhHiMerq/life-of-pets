@@ -1,4 +1,5 @@
 import { useAuth } from '@redwoodjs/auth'
+import 'src/index.css'
 import {
   Form,
   FormError,
@@ -38,13 +39,20 @@ const CommentForm = ({ userId, postId }) => {
     })
   }
   return (
-    <div>
+    <div className="card">
       <Toaster />
       <Form onSubmit={onSubmit} formMethods={formMethods}>
         <FormError error={error} />
-        <h3>Leave a Comment</h3>
-        <TextAreaField name="body" validation={{ required: true }} />
-        <Submit disabled={loading}>Post</Submit>
+        <TextAreaField
+          className="input"
+          placeholder="Leave a Comment"
+          name="body"
+          validation={{ required: true }}
+        />
+        <br />
+        <Submit className="btn flex-end" disabled={loading}>
+          Post
+        </Submit>
       </Form>
     </div>
   )
