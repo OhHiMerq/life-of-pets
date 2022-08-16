@@ -22,7 +22,7 @@ const Article = ({ article, summary = false }) => {
       {summary && (
         <div>
           <CommentForm postId={article.id} userId={article.userId} />
-          <CommentsCell />
+          <CommentsCell postId={article.id} />
         </div>
       )}
     </article>

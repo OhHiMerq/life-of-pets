@@ -26,7 +26,7 @@ const CommentForm = ({ userId, postId }) => {
       toast.success('Comment Posted')
       formMethods.reset()
     },
-    refetchQueries: [{ query: CommentsQuery }],
+    refetchQueries: [{ query: CommentsQuery, variables: { postId: postId } }],
   })
   const onSubmit = (input) => {
     createComment({
