@@ -9,6 +9,7 @@ import {
 import { useMutation } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
 import { QUERY as PostsQuery } from 'src/components/FollowedArticlesCell'
+import 'src/index.css'
 
 const CREATE = gql`
   mutation CreatePostMutation($input: CreatePostInput!) {
@@ -42,14 +43,20 @@ const PostForm = ({ userId }: Props) => {
     createPost({ variables: { input: { userId, ...input } } })
   }
   return (
-    <div>
+    <div className="card">
       <Toaster />
-      <h3>Create Post</h3>
       <Form onSubmit={onSubmit} error={error} formMethods={formMethods}>
         <FormError error={error} />
-        <TextAreaField name="body" validation={{ required: true }} />
+        <TextAreaField
+          name="body"
+          validation={{ required: true }}
+          className="input"
+          placeholder="Create a Post"
+        />
         <br />
-        <Submit disabled={loading}>Publish</Submit>
+        <Submit className="btn flex-end" disabled={loading}>
+          Publish
+        </Submit>
       </Form>
     </div>
   )

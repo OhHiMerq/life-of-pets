@@ -5,7 +5,7 @@ const ProfileElement = ({ profile }) => {
   return (
     <div className="card">
       <Link to={routes.profile({ id: profile.id })}>
-        <h2>{profile.email}</h2>
+        <h3>{profile.email}</h3>
       </Link>
       <FollowAction profileId={profile.id} />
     </div>
