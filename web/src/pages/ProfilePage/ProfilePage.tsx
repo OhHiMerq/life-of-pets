@@ -9,7 +9,7 @@ const ProfilePage = ({ id }) => {
   return (
     <>
       <MetaTags title="Profile" description="Profile page" />
-      <ProfileHeader userId={profileId} />
+      <ProfileHeader userId={profileId} currentUserId={currentUser.id} />
       <ArticlesCell userId={profileId} />
     </>
   )
