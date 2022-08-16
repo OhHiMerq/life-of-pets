@@ -12,29 +12,33 @@ const formattedDate = (datetime: ConstructorParameters<typeof Date>[0]) => {
 
 const Article = ({ article, summary = false }) => {
   return (
-    <article className="article">
-      <header className="article-header">
-        <Link to={routes.profile({ id: article.userId })}>
-          <h3 className="article-email">{article.User.email}</h3>
-        </Link>
-        <p className="article-date">{formattedDate(article.createdAt)}</p>
-      </header>
-      <div
-        onClick={() => {
-          navigate(routes.article({ id: article.id }))
-        }}
-        className="article-body"
-      >
-        {article.body}
-      </div>
-      <PostDetails article={article} />
+    <>
+      <article className="article">
+        <header className="header">
+          <Link to={routes.profile({ id: article.userId })}>
+            <h3 className="email">{article.User.email}</h3>
+          </Link>
+          <p className="date">{formattedDate(article.createdAt)}</p>
+        </header>
+        <div
+          onClick={() => {
+            navigate(routes.article({ id: article.id }))
+          }}
+          className="body"
+        >
+          {article.body}
+        </div>
+        <PostDetails article={article} />
+      </article>
+
       {summary && (
         <div>
+          <h2>Comments</h2>
           <CommentForm postId={article.id} userId={article.userId} />
           <CommentsCell postId={article.id} />
         </div>
       )}
-    </article>
+    </>
   )
 }
 

@@ -40,20 +40,20 @@
   margin: 1em;
 }
 
-.article-header {
+.header {
   background-color: #eff6ff;
   padding: 1em;
 }
 
-.article-body {
+.body {
   padding: 1em;
 }
 
-.article-email {
+.email {
   margin-bottom: 0px;
   margin-top: 0px;
 }
-.article-date {
+.date {
   font-size: 0.75em;
   margin: 0px;
 }
@@ -70,4 +70,10 @@
 }
 .article-details-comment:hover {
   background-color: #94c1df;
+}
+
+.comment {
+  box-shadow: 0 3.2px 7.2px 0 rgb(0 0 0 / 13%), 0 0.6px 1.8px 0 rgb(0 0 0 / 11%);
+  width: 25em;
+  margin: 1em;
 }
