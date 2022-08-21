@@ -6,6 +6,7 @@ import 'src/index.css'
 import { useState } from 'react'
 import { useAuth } from '@redwoodjs/auth'
 import EditPost from '../EditPost/EditPost'
+import YoutubePlayer from '../YoutubePlayer/YoutubePlayer'
 
 const formattedDate = (datetime: ConstructorParameters<typeof Date>[0]) => {
   const parsedDate = new Date(datetime)
@@ -42,7 +43,10 @@ const Article = ({ article, summary = false }) => {
           {isEdit ? (
             <EditPost article={article} setIsEdit={setIsEdit} />
           ) : (
-            <>{article.body}</>
+            <>
+              {article.body}
+              <YoutubePlayer article={article} />
+            </>
           )}
         </div>
         <PostDetails article={article} />
