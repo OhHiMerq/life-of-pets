@@ -16,6 +16,7 @@ const formattedDate = (datetime: ConstructorParameters<typeof Date>[0]) => {
 const Article = ({ article, summary = false }) => {
   const { currentUser } = useAuth()
   const [isEdit, setIsEdit] = useState(false)
+
   return (
     <>
       <article className="article">
@@ -25,17 +26,24 @@ const Article = ({ article, summary = false }) => {
           </Link>
           <p className="date">{formattedDate(article.createdAt)}</p>
           {article.userId == currentUser.id ? (
-            <button
-              onClick={() => {
-                setIsEdit(!isEdit)
-              }}
-            >
-              Edit
-            </button>
+            <>
+              <button
+                onClick={() => {
+                  setIsEdit(true)
+                }}
+                disabled={isEdit}
+              >
+                Edit
+              </button>
+            </>
           ) : null}
         </header>
         <div className="body">
-          {isEdit ? <EditPost article={article} /> : <>{article.body}</>}
+          {isEdit ? (
+            <EditPost article={article} setIsEdit={setIsEdit} />
+          ) : (
+            <>{article.body}</>
+          )}
         </div>
         <PostDetails article={article} />
       </article>
