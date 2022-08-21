@@ -144,7 +144,7 @@ const PostReact = ({ article, currentUser }) => {
   }
 
   return (
-    <div>
+    <span>
       <button
         style={
           userReactData.userReact && userReactData.userReact.value == 1
@@ -170,7 +170,7 @@ const PostReact = ({ article, currentUser }) => {
       >
         ⬇️ {dislikes}
       </button>
-    </div>
+    </span>
   )
 }
 
