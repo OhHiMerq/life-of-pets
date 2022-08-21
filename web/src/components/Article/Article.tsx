@@ -3,6 +3,9 @@ import PostDetails from '../PostDetails/PostDetails'
 import CommentsCell from 'src/components/CommentsCell'
 import CommentForm from '../CommentForm/CommentForm'
 import 'src/index.css'
+import { useState } from 'react'
+import { useAuth } from '@redwoodjs/auth'
+import EditPost from '../EditPost/EditPost'
 
 const formattedDate = (datetime: ConstructorParameters<typeof Date>[0]) => {
   const parsedDate = new Date(datetime)
@@ -11,6 +14,8 @@ const formattedDate = (datetime: ConstructorParameters<typeof Date>[0]) => {
 }
 
 const Article = ({ article, summary = false }) => {
+  const { currentUser } = useAuth()
+  const [isEdit, setIsEdit] = useState(false)
   return (
     <>
       <article className="article">
@@ -19,14 +24,18 @@ const Article = ({ article, summary = false }) => {
             <h3 className="email">{article.User.email}</h3>
           </Link>
           <p className="date">{formattedDate(article.createdAt)}</p>
+          {article.userId == currentUser.id ? (
+            <button
+              onClick={() => {
+                setIsEdit(!isEdit)
+              }}
+            >
+              Edit
+            </button>
+          ) : null}
         </header>
-        <div
-          onClick={() => {
-            navigate(routes.article({ id: article.id }))
-          }}
-          className="body"
-        >
-          {article.body}
+        <div className="body">
+          {isEdit ? <EditPost article={article} /> : <>{article.body}</>}
         </div>
         <PostDetails article={article} />
       </article>
